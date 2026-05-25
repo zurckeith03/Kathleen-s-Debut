@@ -675,6 +675,231 @@ footer::before{
   .ent-box{padding:36px 22px;}
   nav a{padding:12px 9px;font-size:8px;letter-spacing:1.5px;}
 }
+
+/* ─── AUDIO PLAYER ─── */
+#audioWidget{
+  position:fixed;
+  bottom:28px;right:28px;
+  z-index:400;
+  display:flex;align-items:center;gap:0;
+  background:rgba(26,14,28,0.92);
+  border:1px solid rgba(184,137,42,0.4);
+  backdrop-filter:blur(20px);
+  box-shadow:0 8px 40px rgba(0,0,0,0.45),0 0 0 1px rgba(196,136,204,0.08);
+  overflow:hidden;
+  transition:width .4s cubic-bezier(.4,0,.2,1);
+  width:52px; /* collapsed */
+}
+#audioWidget.expanded{
+  width:240px;
+}
+/* gold top line */
+#audioWidget::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+
+/* main toggle button */
+#audioBtnMain{
+  width:52px;height:52px;flex-shrink:0;
+  background:none;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:2;
+}
+/* spinning vinyl disc */
+.vinyl{
+  width:30px;height:30px;border-radius:50%;
+  background:conic-gradient(
+    #2a1a2e 0deg,#1a0e1c 60deg,
+    #3b2040 60deg,#2a1a2e 120deg,
+    #1a0e1c 120deg,#2a1a2e 180deg,
+    #3b2040 180deg,#1a0e1c 240deg,
+    #2a1a2e 240deg,#3b2040 300deg,
+    #1a0e1c 300deg,#2a1a2e 360deg
+  );
+  border:1.5px solid rgba(184,137,42,0.5);
+  position:relative;
+  transition:transform .3s;
+}
+.vinyl::before{
+  content:'';position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 0 2px rgba(26,14,28,1),0 0 0 3px rgba(184,137,42,0.4);
+}
+.vinyl.spinning{
+  animation:vinylSpin 3s linear infinite;
+}
+@keyframes vinylSpin{
+  from{transform:rotate(0deg);}to{transform:rotate(360deg);}
+}
+
+/* note icon when not playing */
+.note-icon{
+  position:absolute;
+  font-size:14px;
+  opacity:0;transition:opacity .25s;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+#audioWidget:not(.playing) .note-icon{opacity:1;}
+#audioWidget:not(.playing) .vinyl{opacity:0.35;}
+
+/* expanded panel */
+#audioPanel{
+  flex:1;padding:0 14px 0 4px;
+  overflow:hidden;
+  opacity:0;transition:opacity .3s .05s;
+  pointer-events:none;
+  min-width:0;
+}
+#audioWidget.expanded #audioPanel{
+  opacity:1;pointer-events:auto;
+}
+.ap-title{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:11px;color:var(--cream);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  margin-bottom:6px;opacity:.85;
+  display:block;
+}
+.ap-artist{
+  font-family:'Jost',sans-serif;font-size:8.5px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(184,137,42,.6);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  display:block;margin-bottom:10px;
+}
+
+/* waveform bars (visual only) */
+.ap-wave{
+  display:flex;align-items:flex-end;gap:2px;height:18px;
+}
+.ap-bar{
+  width:2px;border-radius:1px;
+  background:var(--gold);
+  opacity:.5;
+  transform-origin:bottom;
+  animation:none;
+}
+#audioWidget.playing .ap-bar{
+  animation:barDance var(--bd,.6s) ease-in-out infinite alternate;
+  opacity:.75;
+}
+@keyframes barDance{
+  from{transform:scaleY(.2);}to{transform:scaleY(1);}
+}
+
+/* volume + mute row */
+.ap-controls{
+  display:flex;align-items:center;gap:8px;margin-top:10px;
+}
+.ap-mute{
+  background:none;border:none;cursor:pointer;
+  font-size:13px;line-height:1;padding:0;
+  color:rgba(215,190,150,.6);transition:color .2s;flex-shrink:0;
+}
+.ap-mute:hover{color:var(--gold-light);}
+.ap-vol{
+  flex:1;height:2px;
+  -webkit-appearance:none;appearance:none;
+  background:rgba(184,137,42,.25);
+  border-radius:1px;outline:none;cursor:pointer;
+}
+.ap-vol::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--gold);cursor:pointer;
+  box-shadow:0 0 4px rgba(184,137,42,.5);
+}
+.ap-vol::-moz-range-thumb{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--gold);border:none;cursor:pointer;
+}
+
+/* autoplay overlay — shown on first visit since browsers block autoplay */
+#autoplayOverlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(26,14,28,0.97);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:0;
+  opacity:1;transition:opacity .6s;
+}
+#autoplayOverlay.hide{opacity:0;pointer-events:none;}
+.ao-lanterns{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.ao-content{
+  position:relative;z-index:2;
+  text-align:center;padding:0 24px;
+  max-width:460px;
+}
+.ao-eyebrow{
+  font-family:'Jost',sans-serif;font-size:9px;
+  letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;display:block;
+  animation:riseIn .8s .2s both;
+}
+.ao-name{
+  font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;
+  font-size:clamp(44px,9vw,88px);color:var(--cream);
+  line-height:.95;margin-bottom:8px;
+  animation:riseIn .9s .35s both;
+}
+.ao-sub{
+  font-family:'Jost',sans-serif;font-size:9px;
+  letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold-light);margin-bottom:32px;
+  animation:riseIn .8s .5s both;
+}
+.ao-quote{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:clamp(14px,2vw,18px);
+  color:rgba(250,246,240,.45);
+  line-height:1.85;margin-bottom:44px;
+  animation:riseIn .8s .65s both;
+}
+.ao-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:16px 40px;
+  background:transparent;
+  border:1px solid rgba(184,137,42,.5);
+  color:var(--cream);cursor:pointer;
+  font-family:'Jost',sans-serif;font-size:10px;
+  font-weight:500;letter-spacing:3px;text-transform:uppercase;
+  transition:background .25s,border-color .25s,transform .2s;
+  animation:riseIn .8s .85s both;
+  position:relative;overflow:hidden;
+}
+.ao-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(184,137,42,.12),rgba(196,136,204,.08));
+  opacity:0;transition:opacity .25s;
+}
+.ao-btn:hover{border-color:var(--gold);transform:translateY(-2px);}
+.ao-btn:hover::before{opacity:1;}
+.ao-btn-icon{font-size:18px;animation:pulse 2s 1s infinite ease-in-out;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+.ao-skip{
+  display:block;margin-top:20px;
+  font-family:'Jost',sans-serif;font-size:9px;
+  letter-spacing:2px;text-transform:uppercase;
+  color:rgba(250,246,240,.2);
+  background:none;border:none;cursor:pointer;
+  transition:color .2s;
+  animation:riseIn .8s 1.1s both;
+}
+.ao-skip:hover{color:rgba(250,246,240,.45);}
+/* gold rule */
+.ao-rule{
+  display:flex;align-items:center;gap:12px;
+  justify-content:center;margin:0 0 32px;
+  animation:riseIn .8s .55s both;
+}
+.ao-rl{width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(184,137,42,.4));}
+.ao-rr{width:60px;height:1px;background:linear-gradient(90deg,rgba(184,137,42,.4),transparent);}
+.ao-rd{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);}
+
 </style>
 </head>
 <body>
@@ -687,7 +912,7 @@ footer::before{
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#countdown">Countdown</a></li>
       <li><a href="#traditions">18 Moments</a></li>
-      <!--<li><a href="#entourage">Entourage</a></li> -->
+      <!--<li><a href="#entourage">Entourage</a></li>-->
       <li><a href="#map-section">Directions</a></li>
       <li><a href="#rsvp">RSVP</a></li>
     </ul>
@@ -858,6 +1083,59 @@ footer::before{
   </p>
 </section>
 
+<!-- ══════════════════════════════════
+     AUTOPLAY SPLASH OVERLAY
+════════════════════════════════════ -->
+<div id="autoplayOverlay">
+  <div class="ao-lanterns" id="aoLanterns"></div>
+  <div class="ao-content">
+    <span class="ao-eyebrow">Padayon Invitation PH &nbsp;·&nbsp; 2026</span>
+    <h1 class="ao-name">Kathleen</h1>
+    <p class="ao-sub">Zuriela Cruz &nbsp;&middot;&nbsp; XVIII</p>
+    <div class="ao-rule">
+      <div class="ao-rl"></div><div class="ao-rd"></div><div class="ao-rr"></div>
+    </div>
+    <p class="ao-quote">"By God's grace, my story continues<br>to unfold like a fairytale."</p>
+    <button class="ao-btn" onclick="enterWithMusic()">
+      <span class="ao-btn-icon">&#9834;</span>
+      Enter with Music
+    </button>
+    <button class="ao-skip" onclick="enterSilent()">Enter without music</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     BACKGROUND AUDIO
+     ACTION REQUIRED: Replace YOUR_AUDIO_FILE_URL
+     with a royalty-free .mp3 URL.
+     Recommended: search "I See the Light piano cover"
+     on pixabay.com/music (free), download, upload
+     to your GitHub repo, use the raw file URL.
+════════════════════════════════════ -->
+<audio id="bgAudio" loop preload="none">
+  <source src="https://raw.githubusercontent.com/zurckeith03/Kathleen-s-Debut/main/music.mp3" type="audio/mpeg"/>
+</audio>
+
+<!-- ══════════════════════════════════
+     FLOATING AUDIO PLAYER WIDGET
+════════════════════════════════════ -->
+<div id="audioWidget" style="display:none;">
+  <button id="audioBtnMain" onclick="togglePlay()" title="Play / Pause" aria-label="Toggle background music">
+    <div class="vinyl" id="vinylDisc"></div>
+    <span class="note-icon">&#9834;</span>
+  </button>
+  <div id="audioPanel">
+    <span class="ap-title">I See the Light</span>
+    <span class="ap-artist">Mandy Moore &amp; Zachary Levi</span>
+    <div class="ap-wave" id="apWave"></div>
+    <div class="ap-controls">
+      <button class="ap-mute" id="muteBtn" onclick="toggleMute()" title="Mute / Unmute">&#128266;</button>
+      <input class="ap-vol" id="volSlider" type="range" min="0" max="1" step="0.05" value="0.4"
+             oninput="setVolume(this.value)" title="Volume"/>
+    </div>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
@@ -956,8 +1234,8 @@ footer::before{
   </div>
 </section>
 
-<!-- ENTOURAGE -->
-<!-- <section id="entourage" class="sec sec-alt">
+<!-- ENTOURAGE 
+<section id="entourage" class="sec sec-alt">
   <div class="sec-head rv">
     <span class="sec-eyebrow">Her royal court</span>
     <h2 class="sec-title">The <em>Entourage</em></h2>
@@ -1011,7 +1289,7 @@ footer::before{
     <p class="rsvp-notice">Kindly confirm your attendance by June 8, 2026</p>
 
     <!-- FORMSPREE SETUP NOTE (visible to site owner only during setup) -->
-    <!--  <div class="rsvp-formspree-note">
+  <!--  <div class="rsvp-formspree-note">
       <strong style="color:var(--gold-light);">&#9432; For the site owner:</strong> To receive RSVP emails, sign up free at
       <a href="https://formspree.io" target="_blank">formspree.io</a>, create a form, then replace
       <code style="color:var(--orchid);">YOUR_FORMSPREE_ID</code> in the form action below with your form ID.
@@ -1187,6 +1465,126 @@ function handleRSVP(e){
   }).catch(function(){
     alert('Network error. Please try again.');
   });
+}
+
+/* ── AUDIO PLAYER ── */
+var audio = document.getElementById('bgAudio');
+var widget = document.getElementById('audioWidget');
+var vinyl = document.getElementById('vinylDisc');
+var muteBtn = document.getElementById('muteBtn');
+var volSlider = document.getElementById('volSlider');
+var isPlaying = false;
+var isMuted = false;
+
+// Build waveform bars
+(function(){
+  var wave = document.getElementById('apWave');
+  var heights = [4,8,14,10,18,12,7,16,11,9,15,6,13,8,17];
+  heights.forEach(function(h, i){
+    var b = document.createElement('div');
+    b.className = 'ap-bar';
+    b.style.height = h + 'px';
+    b.style.setProperty('--bd', (.35 + Math.random() * .5) + 's');
+    b.style.animationDelay = (i * 0.06) + 's';
+    wave.appendChild(b);
+  });
+})();
+
+// Build overlay lanterns
+(function(){
+  var f = document.getElementById('aoLanterns');
+  if(!f) return;
+  for(var i = 0; i < 14; i++){
+    var l = document.createElement('div');
+    l.className = 'ln';
+    l.style.cssText = [
+      'left:' + (3 + Math.random() * 94) + '%',
+      'bottom:0px',
+      '--ld:' + (8 + Math.random() * 10) + 's',
+      '--dl:' + (Math.random() * 12) + 's',
+      '--dx:' + (-60 + Math.random() * 120) + 'px',
+      '--rr:' + (-15 + Math.random() * 30) + 'deg'
+    ].join(';');
+    f.appendChild(l);
+  }
+})();
+
+// Hover to expand / collapse player
+widget.addEventListener('mouseenter', function(){ widget.classList.add('expanded'); });
+widget.addEventListener('mouseleave', function(){ widget.classList.remove('expanded'); });
+// Touch devices: tap to expand
+widget.addEventListener('touchstart', function(e){
+  if(!widget.classList.contains('expanded')){
+    e.preventDefault();
+    widget.classList.add('expanded');
+  }
+}, {passive:false});
+
+function setAudioState(playing){
+  isPlaying = playing;
+  if(playing){
+    widget.classList.add('playing');
+    vinyl.classList.add('spinning');
+  } else {
+    widget.classList.remove('playing');
+    vinyl.classList.remove('spinning');
+  }
+}
+
+function enterWithMusic(){
+  var overlay = document.getElementById('autoplayOverlay');
+  overlay.classList.add('hide');
+  setTimeout(function(){ overlay.style.display='none'; }, 650);
+  widget.style.display = 'flex';
+  audio.volume = parseFloat(volSlider.value);
+  // Fade in from silence
+  audio.volume = 0;
+  audio.play().then(function(){
+    setAudioState(true);
+    var target = parseFloat(volSlider.value);
+    var step = 0;
+    var fadeIn = setInterval(function(){
+      step += 0.02;
+      audio.volume = Math.min(step, target);
+      if(audio.volume >= target) clearInterval(fadeIn);
+    }, 80);
+  }).catch(function(){
+    // Audio src not set yet — widget still shows
+    setAudioState(false);
+  });
+}
+
+function enterSilent(){
+  var overlay = document.getElementById('autoplayOverlay');
+  overlay.classList.add('hide');
+  setTimeout(function(){ overlay.style.display='none'; }, 650);
+  widget.style.display = 'flex';
+  setAudioState(false);
+}
+
+function togglePlay(){
+  if(audio.paused){
+    audio.volume = isMuted ? 0 : parseFloat(volSlider.value);
+    audio.play().then(function(){ setAudioState(true); }).catch(function(){});
+  } else {
+    audio.pause();
+    setAudioState(false);
+  }
+}
+
+function toggleMute(){
+  isMuted = !isMuted;
+  audio.muted = isMuted;
+  muteBtn.textContent = isMuted ? '🔇' : '🔊';
+}
+
+function setVolume(v){
+  audio.volume = parseFloat(v);
+  if(parseFloat(v) === 0){
+    isMuted = true; audio.muted = true; muteBtn.textContent = '🔇';
+  } else if(isMuted){
+    isMuted = false; audio.muted = false; muteBtn.textContent = '🔊';
+  }
 }
 
 /* ── SCROLL REVEAL ── */
