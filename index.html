@@ -1006,7 +1006,7 @@ footer::before{
         <div>
           <div class="sdb-lbl">Dress Code</div>
           <div class="sdb-val">Semi-Formal</div>
-          <div class="sdb-sub">Suggested palette</div>
+          <!-- <div class="sdb-sub">Suggested palette</div> -->
           <div class="dress-dots">
             <div class="dd" style="background:#f0a0c0;" title="Pink"></div>
             <div class="dd" style="background:#7dbf7d;" title="Green"></div>
@@ -1183,7 +1183,7 @@ footer::before{
     <button class="tt on" onclick="showTrad(0,this)">18 Roses</button>
     <button class="tt" onclick="showTrad(1,this)">18 Treasures</button>
     <button class="tt" onclick="showTrad(2,this)">18 Cosmetics</button>
-    <button class="tt" onclick="showTrad(3,this)">18 Blessings</button>
+    <button class="tt" onclick="showTrad(3,this)">18 Violet Blessings</button>
     <button class="tt" onclick="showTrad(4,this)">18 Wishes</button>
   </div>
 
@@ -1386,18 +1386,23 @@ function tick(){
 tick();setInterval(tick,1000);
 
 /* ── TRADITION NAMES ── */
-var ph=Array.from({length:18},function(_,i){return 'Guest Name '+(i+1);});
+var roses = ['Juan dela Cruz','Miguel Santos','Carlo Reyes','...and so on up to 18'];
+var treasures = ['Maria Garcia','Ana Lim','Sofia Tan','...'];
+var cosmetics = ['Bianca Cruz','Trisha Gomez','Lia Mendoza','...'];
+var blessings = ['Tito Bobby','Tita Rose','Lolo Pedro','...'];
+var wishes = ['Best Friend 1','Best Friend 2','Ninang 1','...'];
+   
 function buildNames(id,arr){
   var c=document.getElementById(id);if(!c)return;
   c.innerHTML=arr.map(function(n,i){
     return '<div class="tp-item"><span class="tp-n">'+String(i+1).padStart(2,'0')+'</span><span class="tp-v">'+n+'</span></div>';
   }).join('');
 }
-buildNames('gRoses',ph.slice());
-buildNames('gTreasures',ph.slice());
-buildNames('gCosmetics',ph.slice());
-buildNames('gBlessings',ph.slice());
-buildNames('gWishes',ph.slice());
+buildNames('gRoses', roses);
+buildNames('gTreasures', treasures);
+buildNames('gCosmetics', cosmetics);
+buildNames('gBlessings', blessings);
+buildNames('gWishes', wishes);
 
 function showTrad(idx,btn){
   document.querySelectorAll('.tp').forEach(function(p){p.classList.remove('on');});
