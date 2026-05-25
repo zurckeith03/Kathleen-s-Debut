@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kathleen Zuriela Cruz · Debut 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700&family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ─────────────────────────────────────────
+   TOKENS  –  orchid used sparingly as accent
+───────────────────────────────────────── */
+:root{
+  /* primary surfaces */
+  --ink:        #1a0e1c;
+  --ink-mid:    #3b2040;
+  --ink-soft:   #6b4f72;
+  --cream:      #faf6f0;
+  --parch:      #f3ead8;
+  --parch-dark: #e8dcc4;
+
+  /* gold hierarchy */
+  --gold:       #b8892a;
+  --gold-light: #d4ac58;
+  --gold-pale:  #f5e8c4;
+
+  /* orchid – accent only, never dominant fill */
+  --orchid:     #c488cc;
+  --orchid-dim: rgba(196,136,204,.18);
+  --orchid-rule:rgba(196,136,204,.35);
+
+  /* status / functional */
+  --green-ok:   #4a8c5c;
+  --white:      #ffffff;
+}
+
+/* ─── RESET & BASE ─── */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+::selection{background:var(--orchid);color:var(--white);}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--parch);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;width:100%;z-index:300;
+  background:rgba(26,14,28,.93);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(184,137,42,.3);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:center;
+  max-width:1140px;margin:0 auto;padding:0 24px;
+}
+nav ul{display:flex;flex-wrap:wrap;justify-content:center;gap:0;list-style:none;}
+nav a{
+  display:block;padding:15px 14px;
+  font-family:'Jost',sans-serif;font-size:9.5px;
+  font-weight:500;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(215,190,150,.65);text-decoration:none;
+  transition:color .22s;
+}
+nav a:hover{color:var(--gold-light);}
+
+/* ─── HERO ─── */
+#hero{
+  position:relative;min-height:100vh;overflow:hidden;
+  background:var(--ink);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:110px 24px 80px;text-align:center;
+}
+
+/* textured noise overlay */
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;opacity:.6;
+}
+
+/* warm radial glow */
+.hero-glow{
+  position:absolute;
+  width:700px;height:700px;
+  border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(212,172,88,.09) 0%,
+    rgba(196,136,204,.05) 40%,
+    transparent 70%);
+  top:50%;left:50%;
+  transform:translate(-50%,-55%);
+  pointer-events:none;
+}
+
+/* floating lanterns */
+.lf{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.ln{
+  position:absolute;
+  width:14px;height:20px;
+  border-radius:2px 2px 4px 4px;
+  background:radial-gradient(ellipse at 50% 40%,#ffd96a,#f09820);
+  opacity:0;
+  animation:lnRise var(--ld,9s) var(--dl,0s) infinite ease-in;
+}
+.ln::after{
+  content:'';position:absolute;inset:4px;
+  background:rgba(255,245,160,.6);border-radius:1px;
+}
+@keyframes lnRise{
+  0%{opacity:0;transform:translateY(0) translateX(0) rotate(0);}
+  10%{opacity:.85;}80%{opacity:.45;}
+  100%{opacity:0;transform:translateY(-60vh) translateX(var(--dx,30px)) rotate(var(--rr,10deg));}
+}
+
+/* ornate SVG border frame */
+.hero-border{
+  position:absolute;inset:24px;pointer-events:none;
+}
+
+/* main content */
+.hero-content{position:relative;z-index:2;max-width:720px;}
+.hero-overline{
+  font-family:'Jost',sans-serif;font-size:9px;
+  font-weight:500;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:24px;
+  opacity:0;animation:riseIn .8s .2s forwards;
+}
+.hero-name-a{
+  font-family:'Bodoni Moda',serif;
+  font-size:clamp(64px,11vw,128px);
+  font-weight:400;font-style:italic;
+  color:var(--cream);line-height:.9;
+  opacity:0;animation:riseIn .9s .38s forwards;
+}
+.hero-name-b{
+  font-family:'Bodoni Moda',serif;
+  font-size:clamp(16px,3vw,28px);
+  font-weight:700;
+  letter-spacing:10px;text-transform:uppercase;
+  color:var(--gold-light);margin-top:6px;
+  opacity:0;animation:riseIn .9s .52s forwards;
+}
+.hero-rule{
+  display:flex;align-items:center;gap:12px;
+  justify-content:center;margin:28px 0;
+  opacity:0;animation:riseIn .8s .66s forwards;
+}
+.h-rl{flex:1;max-width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.h-rr{flex:1;max-width:100px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
+.h-rd{
+  width:6px;height:6px;
+  background:var(--gold);transform:rotate(45deg);
+}
+.h-rs{
+  width:4px;height:4px;
+  background:var(--orchid);transform:rotate(45deg);
+}
+.hero-date{
+  font-family:'Cormorant',serif;font-size:clamp(15px,2.2vw,20px);
+  font-weight:300;letter-spacing:5px;
+  color:rgba(215,190,150,.8);
+  opacity:0;animation:riseIn .8s .78s forwards;
+}
+.hero-xviii{
+  font-family:'Bodoni Moda',serif;font-size:12px;
+  letter-spacing:8px;color:rgba(196,136,204,.65);
+  margin-top:18px;
+  opacity:0;animation:riseIn .8s .9s forwards;
+}
+.hero-quote{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:clamp(14px,1.9vw,18px);
+  color:rgba(250,246,240,.45);
+  max-width:480px;margin:22px auto 0;line-height:1.9;
+  opacity:0;animation:riseIn .8s 1.02s forwards;
+}
+.hero-scroll{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  font-size:9px;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(184,137,42,.4);
+  animation:bob 2.5s 2s infinite ease-in-out;
+}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(7px);}}
+@keyframes riseIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+
+/* ─── SHARED SECTION STYLES ─── */
+.sec{padding:96px 24px;position:relative;}
+.sec-alt{background:var(--parch);}
+.sec-dark{background:var(--ink);color:var(--cream);}
+.sec-mid{background:var(--ink-mid);}
+
+.sec-head{text-align:center;margin-bottom:52px;}
+.sec-eyebrow{
+  display:block;
+  font-family:'Jost',sans-serif;font-size:8.5px;
+  font-weight:500;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px;
+}
+.sec-eyebrow.light{color:var(--gold-light);}
+.sec-title{
+  font-family:'Bodoni Moda',serif;font-weight:400;
+  font-size:clamp(34px,5.5vw,62px);
+  color:var(--ink);line-height:1.05;
+}
+.sec-title em{font-style:italic;color:var(--gold);}
+.sec-title.light{color:var(--cream);}
+.sec-title.light em{color:var(--gold-light);}
+.sec-orn{
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;margin-top:16px;
+}
+.o-l{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.o-r{width:60px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
+.o-d{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);}
+.o-s{width:3px;height:3px;background:var(--orchid);transform:rotate(45deg);}
+
+/* ─── HER STORY ─── */
+#story .story-wrap{
+  max-width:980px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:64px;align-items:center;
+}
+@media(max-width:720px){#story .story-wrap{grid-template-columns:1fr;gap:40px;}}
+
+.story-body{
+  font-family:'Cormorant',serif;font-size:clamp(17px,2vw,21px);
+  font-weight:300;line-height:1.95;color:var(--ink-soft);
+}
+.story-drop{
+  font-family:'Bodoni Moda',serif;font-weight:900;font-style:italic;
+  font-size:90px;color:var(--parch-dark);
+  float:left;line-height:.78;margin:8px 10px 0 0;
+}
+.story-sig{
+  display:block;margin-top:28px;
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:20px;color:var(--orchid);
+  padding-top:20px;border-top:1px solid var(--orchid-rule);
+}
+.story-detail-box{
+  background:var(--ink);
+  padding:44px 36px;
+  position:relative;
+  overflow:hidden;
+}
+.story-detail-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.story-detail-box::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--orchid-rule),transparent);
+}
+.sdb-item{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07);
+}
+.sdb-item:last-child{border-bottom:none;}
+.sdb-icon{
+  font-size:20px;flex-shrink:0;
+  width:38px;height:38px;
+  background:rgba(184,137,42,.12);
+  display:flex;align-items:center;justify-content:center;
+}
+.sdb-lbl{
+  font-family:'Jost',sans-serif;font-size:8.5px;
+  letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:5px;
+}
+.sdb-val{
+  font-family:'Cormorant',serif;font-size:18px;
+  color:var(--cream);line-height:1.3;
+}
+.sdb-sub{
+  font-family:'Jost',sans-serif;font-size:12px;
+  color:rgba(250,246,240,.45);margin-top:3px;line-height:1.5;
+}
+.dress-dots{display:flex;gap:7px;margin-top:8px;}
+.dd{
+  width:20px;height:20px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.2);
+}
+
+/* ─── GALLERY ─── */
+#gallery{background:var(--ink);}
+.gallery-grid{
+  max-width:1100px;margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto auto;
+  gap:10px;
+}
+@media(max-width:680px){
+  .gallery-grid{grid-template-columns:1fr 1fr;}
+}
+.gallery-item{
+  position:relative;overflow:hidden;
+  cursor:pointer;
+  background:var(--ink-mid);
+}
+.gallery-item:first-child{
+  grid-column:1/3;grid-row:1/3;
+}
+@media(max-width:680px){
+  .gallery-item:first-child{grid-column:1/3;grid-row:1/2;}
+}
+.gallery-item img,.gallery-placeholder{
+  width:100%;height:100%;min-height:220px;
+  object-fit:cover;display:block;
+  transition:transform .55s cubic-bezier(.25,.46,.45,.94),filter .55s;
+  filter:sepia(10%) saturate(105%);
+}
+.gallery-placeholder{
+  background:linear-gradient(145deg,var(--ink-mid),rgba(107,79,114,.5));
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;
+}
+.gp-icon{font-size:36px;opacity:.3;}
+.gp-txt{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:13px;color:rgba(250,246,240,.3);
+  letter-spacing:1px;text-align:center;padding:0 16px;
+}
+.gallery-item:hover img{transform:scale(1.06);filter:sepia(0%) saturate(115%);}
+.gallery-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,14,28,.7) 0%,transparent 50%);
+  opacity:0;transition:opacity .4s;
+  display:flex;align-items:flex-end;padding:16px;
+}
+.gallery-item:hover .gallery-overlay{opacity:1;}
+.gallery-caption{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:14px;color:var(--cream);
+  letter-spacing:1px;
+}
+.gallery-expand{
+  position:absolute;top:12px;right:12px;
+  width:32px;height:32px;
+  background:rgba(26,14,28,.6);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--gold-light);
+  opacity:0;transition:opacity .3s;
+}
+.gallery-item:hover .gallery-expand{opacity:1;}
+
+/* ── LIGHTBOX ── */
+.lightbox{
+  display:none;position:fixed;inset:0;z-index:999;
+  background:rgba(26,14,28,.96);
+  align-items:center;justify-content:center;
+  flex-direction:column;gap:20px;
+}
+.lightbox.open{display:flex;}
+.lightbox-img{
+  max-width:90vw;max-height:80vh;
+  object-fit:contain;
+  border:1px solid rgba(184,137,42,.3);
+}
+.lightbox-placeholder{
+  width:min(80vw,600px);height:min(70vh,500px);
+  background:var(--ink-mid);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:12px;
+  border:1px solid rgba(184,137,42,.3);
+}
+.lb-caption{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:15px;color:rgba(250,246,240,.55);letter-spacing:2px;
+}
+.lb-close{
+  position:fixed;top:24px;right:28px;
+  font-size:28px;color:rgba(250,246,240,.5);
+  cursor:pointer;line-height:1;
+  transition:color .2s;background:none;border:none;
+}
+.lb-close:hover{color:var(--gold-light);}
+.lb-nav{
+  position:fixed;top:50%;transform:translateY(-50%);
+  font-size:28px;color:rgba(250,246,240,.4);
+  cursor:pointer;background:none;border:none;
+  transition:color .2s;padding:20px;
+}
+.lb-nav:hover{color:var(--gold-light);}
+.lb-prev{left:10px;}
+.lb-next{right:10px;}
+
+/* ─── COUNTDOWN ─── */
+.cd-grid{
+  display:flex;gap:14px;justify-content:center;
+  flex-wrap:wrap;margin-top:44px;
+}
+.cd-unit{
+  min-width:100px;padding:30px 16px 22px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(184,137,42,.2);
+  position:relative;text-align:center;
+}
+.cd-unit::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold-light),transparent);
+}
+.cd-num{
+  font-family:'Bodoni Moda',serif;font-size:52px;
+  font-weight:900;color:var(--cream);display:block;line-height:1;
+}
+.cd-lbl{
+  font-family:'Jost',sans-serif;font-size:8px;
+  letter-spacing:3px;text-transform:uppercase;
+  color:rgba(184,137,42,.55);margin-top:8px;display:block;
+}
+.cd-done{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:28px;color:var(--gold-light);display:none;margin-top:24px;
+}
+
+/* ─── TRADITIONS ─── */
+.trad-tabs{
+  display:flex;gap:6px;justify-content:center;
+  flex-wrap:wrap;margin-bottom:36px;
+}
+.tt{
+  padding:10px 22px;
+  font-family:'Jost',sans-serif;font-size:9px;
+  font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  cursor:pointer;border:1px solid rgba(184,137,42,.3);
+  color:rgba(215,190,150,.55);background:transparent;
+  transition:all .22s;
+}
+.tt:hover,.tt.on{
+  background:var(--gold);border-color:var(--gold);
+  color:var(--ink);
+}
+.tp{display:none;max-width:920px;margin:0 auto;}
+.tp.on{display:block;}
+.tp-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(184,137,42,.18);
+  padding:44px 40px;position:relative;
+}
+.tp-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),rgba(196,136,204,.6),var(--gold),transparent);
+}
+.tp-head{
+  display:flex;align-items:flex-end;gap:22px;
+  margin-bottom:30px;padding-bottom:24px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.tp-num{
+  font-family:'Bodoni Moda',serif;font-weight:900;
+  font-size:90px;
+  color:rgba(184,137,42,.15);line-height:1;flex-shrink:0;
+}
+.tp-title{
+  font-family:'Bodoni Moda',serif;font-style:italic;
+  font-size:clamp(26px,4vw,42px);color:var(--cream);
+}
+.tp-desc{
+  font-family:'Cormorant',serif;font-size:14px;
+  color:rgba(250,246,240,.5);font-style:italic;
+  margin-top:5px;line-height:1.65;
+}
+.tp-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(185px,1fr));
+  gap:10px;
+}
+.tp-item{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 14px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.06);
+  transition:border-color .2s,background .2s;
+}
+.tp-item:hover{
+  border-color:rgba(184,137,42,.25);
+  background:rgba(184,137,42,.06);
+}
+.tp-n{
+  font-family:'Jost',sans-serif;font-size:10px;
+  color:var(--gold);width:22px;flex-shrink:0;font-weight:500;
+}
+.tp-v{
+  font-family:'Cormorant',serif;font-size:15px;
+  color:rgba(250,246,240,.8);
+}
+
+/* ─── ENTOURAGE ─── */
+.ent-box{
+  max-width:640px;margin:0 auto;text-align:center;
+  border:1px solid rgba(184,137,42,.25);
+  padding:52px 40px;position:relative;
+}
+.ent-box::before,.ent-box::after{
+  content:'';position:absolute;
+  width:20px;height:20px;
+  border-top:1px solid var(--gold);border-left:1px solid var(--gold);
+}
+.ent-box::before{top:-1px;left:-1px;}
+.ent-box::after{
+  border-top:none;border-left:none;
+  border-bottom:1px solid var(--gold);border-right:1px solid var(--gold);
+  top:auto;left:auto;bottom:-1px;right:-1px;
+}
+.ent-title{
+  font-family:'Bodoni Moda',serif;font-style:italic;
+  font-size:28px;color:var(--cream);margin-bottom:14px;
+}
+.ent-body{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:18px;color:rgba(250,246,240,.5);line-height:1.75;
+}
+
+/* ─── MAP ─── */
+.map-wrap{max-width:900px;margin:0 auto;}
+.map-frame{
+  border:2px solid rgba(184,137,42,.35);
+  box-shadow:5px 5px 0 rgba(184,137,42,.15);
+  overflow:hidden;height:400px;
+}
+.map-frame iframe{width:100%;height:100%;border:none;display:block;}
+.map-card{
+  background:var(--white);
+  border:1px solid rgba(26,14,28,.12);
+  border-top:2px solid var(--gold);
+  padding:28px 32px;
+  display:flex;gap:18px;align-items:flex-start;
+}
+.mp-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+.mp-name{
+  font-family:'Bodoni Moda',serif;font-size:22px;
+  color:var(--ink);margin-bottom:5px;
+}
+.mp-addr{
+  font-family:'Jost',sans-serif;font-size:13px;
+  color:var(--ink-soft);line-height:1.7;
+}
+.mp-btn{
+  display:inline-block;margin-top:14px;
+  padding:11px 28px;
+  background:var(--ink);color:var(--cream);
+  font-family:'Jost',sans-serif;font-size:9px;
+  font-weight:500;letter-spacing:2.5px;text-transform:uppercase;
+  text-decoration:none;transition:background .25s,transform .2s;
+}
+.mp-btn:hover{background:var(--ink-mid);transform:translateY(-2px);}
+@media(max-width:600px){.map-card{flex-direction:column;}}
+
+/* ─── RSVP ─── */
+.rsvp-wrap{max-width:580px;margin:0 auto;}
+.rsvp-notice{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:16px;color:rgba(215,190,150,.65);
+  text-align:center;margin-bottom:32px;
+}
+/* Formspree notice */
+.rsvp-formspree-note{
+  background:rgba(184,137,42,.1);
+  border:1px solid rgba(184,137,42,.3);
+  padding:14px 18px;margin-bottom:28px;
+  font-family:'Jost',sans-serif;font-size:11px;
+  color:rgba(215,190,150,.7);letter-spacing:.5px;line-height:1.6;
+}
+.rsvp-formspree-note a{color:var(--gold-light);}
+.rsvp-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(184,137,42,.2);
+  padding:48px 44px;position:relative;
+}
+.rsvp-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.fg{margin-bottom:20px;}
+.fl{
+  display:block;font-family:'Jost',sans-serif;font-size:8.5px;
+  font-weight:500;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(215,190,150,.55);margin-bottom:8px;
+}
+.fi,.fs,.ft{
+  width:100%;padding:13px 16px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(184,137,42,.22);
+  color:var(--cream);
+  font-family:'Jost',sans-serif;font-size:14px;
+  outline:none;transition:border-color .22s,background .22s;
+  border-radius:0;
+}
+.fi::placeholder,.ft::placeholder{color:rgba(250,246,240,.2);}
+.fi:focus,.fs:focus,.ft:focus{
+  border-color:var(--gold);background:rgba(255,255,255,.09);
+}
+.fs{
+  cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23b8892a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  background-color:rgba(255,255,255,.06);
+}
+.fs option{background:#1a0e1c;}
+.ft{resize:vertical;min-height:90px;}
+.fb{
+  width:100%;padding:16px;margin-top:4px;
+  background:var(--gold);border:none;
+  color:var(--ink);
+  font-family:'Jost',sans-serif;font-size:10px;
+  font-weight:500;letter-spacing:3px;text-transform:uppercase;
+  cursor:pointer;transition:background .25s,transform .2s;
+}
+.fb:hover{background:var(--gold-light);transform:translateY(-2px);}
+.rsvp-ok{
+  display:none;padding:32px;text-align:center;
+  border:1px solid rgba(74,140,92,.35);
+  background:rgba(74,140,92,.08);
+}
+.rsvp-ok-title{
+  font-family:'Bodoni Moda',serif;font-style:italic;
+  font-size:28px;color:#7fc99a;margin-bottom:10px;
+}
+.rsvp-ok-body{
+  font-family:'Cormorant',serif;font-size:16px;
+  color:rgba(250,246,240,.55);line-height:1.7;
+}
+
+/* ─── FOOTER ─── */
+footer{
+  padding:64px 24px 44px;
+  background:#0e0710;text-align:center;position:relative;
+}
+footer::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),rgba(196,136,204,.5),var(--gold),transparent);
+}
+.ft-name{
+  font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;
+  font-size:40px;color:var(--cream);
+  letter-spacing:1px;margin-bottom:8px;opacity:.85;
+}
+.ft-quote{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:15px;color:rgba(215,190,150,.35);margin-bottom:30px;
+  max-width:420px;margin-left:auto;margin-right:auto;line-height:1.7;
+}
+.ft-rule{
+  width:1px;height:40px;
+  background:linear-gradient(180deg,transparent,var(--gold),transparent);
+  margin:0 auto 18px;
+}
+.ft-credit{
+  font-family:'Jost',sans-serif;font-size:9px;
+  letter-spacing:3px;text-transform:uppercase;
+  color:rgba(250,246,240,.18);
+}
+
+/* ─── SCROLL REVEAL ─── */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease;}
+.rv.on{opacity:1;transform:none;}
+.d1{transition-delay:.07s;}.d2{transition-delay:.14s;}
+.d3{transition-delay:.21s;}.d4{transition-delay:.28s;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:680px){
+  .rsvp-card{padding:32px 22px;}
+  .tp-card{padding:28px 18px;}
+  .ent-box{padding:36px 22px;}
+  nav a{padding:12px 9px;font-size:8px;letter-spacing:1.5px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <ul>
+      <li><a href="#story">Story</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#countdown">Countdown</a></li>
+      <li><a href="#traditions">18 Moments</a></li>
+      <!--<li><a href="#entourage">Entourage</a></li> -->
+      <li><a href="#map-section">Directions</a></li>
+      <li><a href="#rsvp">RSVP</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="lf" id="lf"></div>
+
+  <!-- Ornate SVG border -->
+  <svg class="hero-border" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- corners -->
+    <path d="M0 12 L0 0 L12 0" stroke="rgba(184,137,42,0.45)" stroke-width="0.3"/>
+    <path d="M88 0 L100 0 L100 12" stroke="rgba(184,137,42,0.45)" stroke-width="0.3"/>
+    <path d="M0 88 L0 100 L12 100" stroke="rgba(184,137,42,0.45)" stroke-width="0.3"/>
+    <path d="M88 100 L100 100 L100 88" stroke="rgba(184,137,42,0.45)" stroke-width="0.3"/>
+    <!-- outer frame -->
+    <rect x="0.2" y="0.2" width="99.6" height="99.6" stroke="rgba(184,137,42,0.12)" stroke-width="0.2"/>
+    <!-- inner frame -->
+    <rect x="1.5" y="1.5" width="97" height="97" stroke="rgba(196,136,204,0.1)" stroke-width="0.15"/>
+    <!-- corner dots -->
+    <circle cx="0" cy="0" r="1" fill="rgba(184,137,42,0.6)"/>
+    <circle cx="100" cy="0" r="1" fill="rgba(184,137,42,0.6)"/>
+    <circle cx="0" cy="100" r="1" fill="rgba(184,137,42,0.6)"/>
+    <circle cx="100" cy="100" r="1" fill="rgba(184,137,42,0.6)"/>
+    <!-- mid-edge gems -->
+    <rect x="49" y="-0.3" width="2" height="2" fill="rgba(184,137,42,0.4)" transform="rotate(45 50 0.7)"/>
+    <rect x="49" y="98.3" width="2" height="2" fill="rgba(184,137,42,0.4)" transform="rotate(45 50 99.3)"/>
+  </svg>
+
+  <div class="hero-content">
+    <p class="hero-overline">Padayon Invitation PH &nbsp;·&nbsp; Debut 2026</p>
+    <h1 class="hero-name-a">Kathleen</h1>
+    <h2 class="hero-name-b">Zuriela Cruz</h2>
+    <div class="hero-rule">
+      <div class="h-rl"></div>
+      <div class="h-rs"></div><div class="h-rd"></div><div class="h-rs"></div>
+      <div class="h-rr"></div>
+    </div>
+    <p class="hero-date">Wednesday &nbsp;·&nbsp; June 17, 2026</p>
+    <p class="hero-xviii">XVIII</p>
+    <blockquote class="hero-quote">"By God's grace, my story continues to unfold like a fairytale."</blockquote>
+  </div>
+  <p class="hero-scroll">Scroll ↓</p>
+</section>
+
+<!-- HER STORY + DETAILS -->
+<section id="story" class="sec">
+  <div class="sec-head rv">
+    <span class="sec-eyebrow">Once upon a time</span>
+    <h2 class="sec-title">Her <em>Story</em></h2>
+    <div class="sec-orn"><div class="o-l"></div><div class="o-s"></div><div class="o-d"></div><div class="o-s"></div><div class="o-r"></div></div>
+  </div>
+  <div class="story-wrap">
+    <div class="rv d1">
+      <p class="story-body">
+        <span class="story-drop">K</span>
+        athleen Zuriela Cruz turns <strong>eighteen</strong> on the seventeenth of June, 2026. Like Rapunzel stepping beyond the tower, she walks into the world with curious eyes and a heart anchored in faith. Guided by grace and surrounded by love, her story has been quietly beautiful — and the most magnificent chapters are only just beginning.
+      </p>
+      <span class="story-sig">With God, every chapter is a fairytale.</span>
+    </div>
+    <div class="story-detail-box rv d2">
+      <div class="sdb-item">
+        <div class="sdb-icon">📅</div>
+        <div>
+          <div class="sdb-lbl">Date</div>
+          <div class="sdb-val">June 17, 2026</div>
+          <div class="sdb-sub">Wednesday</div>
+        </div>
+      </div>
+      <div class="sdb-item">
+        <div class="sdb-icon">🕑</div>
+        <div>
+          <div class="sdb-lbl">Programme Starts</div>
+          <div class="sdb-val">2:30 PM</div>
+          <div class="sdb-sub">Kindly be seated before the programme begins</div>
+        </div>
+      </div>
+      <div class="sdb-item">
+        <div class="sdb-icon">🏛️</div>
+        <div>
+          <div class="sdb-lbl">Venue</div>
+          <div class="sdb-val">JCTGBTG</div>
+          <div class="sdb-sub">138 JP Rizal St., Poblacion 2<br>Puremart Bldg., Mendez, Cavite</div>
+        </div>
+      </div>
+      <div class="sdb-item">
+        <div class="sdb-icon">👗</div>
+        <div>
+          <div class="sdb-lbl">Dress Code</div>
+          <div class="sdb-val">Semi-Formal</div>
+          <div class="sdb-sub">Suggested palette</div>
+          <div class="dress-dots">
+            <div class="dd" style="background:#f0a0c0;" title="Pink"></div>
+            <div class="dd" style="background:#7dbf7d;" title="Green"></div>
+            <div class="dd" style="background:#f4e460;" title="Yellow"></div>
+          </div>
+          <div class="sdb-sub" style="margin-top:6px;">Pink · Green · Yellow</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="sec sec-dark">
+  <div class="sec-head rv">
+    <span class="sec-eyebrow light">Pre-debut portraits</span>
+    <h2 class="sec-title light"><em>Gallery</em></h2>
+    <div class="sec-orn">
+      <div class="o-l" style="background:linear-gradient(90deg,transparent,var(--gold-light))"></div>
+      <div class="o-s"></div><div class="o-d" style="background:var(--gold-light)"></div><div class="o-s"></div>
+      <div class="o-r" style="background:linear-gradient(90deg,var(--gold-light),transparent)"></div>
+    </div>
+  </div>
+  <div class="gallery-grid" id="galleryGrid">
+    <!-- PHOTO 1 (featured/large) -->
+    <div class="gallery-item" onclick="openLightbox(0)">
+      <div class="gallery-placeholder">
+        <div class="gp-icon">📸</div>
+        <p class="gp-txt">Featured pre-debut photo<br><em>Replace with image URL</em></p>
+      </div>
+      <!-- <img src="YOUR_PHOTO_1_URL" alt="Kathleen pre-debut portrait 1"> -->
+      <div class="gallery-overlay"><span class="gallery-caption">Kathleen · 2026</span></div>
+      <div class="gallery-expand">⤢</div>
+    </div>
+    <!-- PHOTO 2 -->
+    <div class="gallery-item" onclick="openLightbox(1)">
+      <div class="gallery-placeholder">
+        <div class="gp-icon">📸</div>
+        <p class="gp-txt">Photo 2</p>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-caption">Kathleen · 2026</span></div>
+      <div class="gallery-expand">⤢</div>
+    </div>
+    <!-- PHOTO 3 -->
+    <div class="gallery-item" onclick="openLightbox(2)">
+      <div class="gallery-placeholder">
+        <div class="gp-icon">📸</div>
+        <p class="gp-txt">Photo 3</p>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-caption">Kathleen · 2026</span></div>
+      <div class="gallery-expand">⤢</div>
+    </div>
+    <!-- PHOTO 4 -->
+    <div class="gallery-item" onclick="openLightbox(3)">
+      <div class="gallery-placeholder">
+        <div class="gp-icon">📸</div>
+        <p class="gp-txt">Photo 4</p>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-caption">Kathleen · 2026</span></div>
+      <div class="gallery-expand">⤢</div>
+    </div>
+    <!-- PHOTO 5 -->
+    <div class="gallery-item" onclick="openLightbox(4)">
+      <div class="gallery-placeholder">
+        <div class="gp-icon">📸</div>
+        <p class="gp-txt">Photo 5</p>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-caption">Kathleen · 2026</span></div>
+      <div class="gallery-expand">⤢</div>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:20px;font-family:'Cormorant',serif;font-style:italic;font-size:13px;color:rgba(250,246,240,.25);letter-spacing:1px;">
+    To add photos: replace the placeholder divs with &lt;img src="your-url"&gt; tags
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-nav lb-prev" onclick="navLightbox(-1)">&#8592;</button>
+  <div class="lightbox-placeholder" id="lbContent">
+    <div class="gp-icon" style="font-size:48px;opacity:.3;">📸</div>
+    <p class="gp-txt">Photo placeholder</p>
+  </div>
+  <p class="lb-caption" id="lbCaption">Kathleen Zuriela Cruz · Pre-debut 2026</p>
+  <button class="lb-nav lb-next" onclick="navLightbox(1)">&#8594;</button>
+</div>
+
+<!-- COUNTDOWN -->
+<section id="countdown" class="sec sec-mid" style="text-align:center;">
+  <div class="sec-head rv">
+    <span class="sec-eyebrow light">The magic begins in</span>
+    <h2 class="sec-title light">Counting <em>Down</em></h2>
+    <div class="sec-orn">
+      <div class="o-l" style="background:linear-gradient(90deg,transparent,rgba(212,172,88,.6))"></div>
+      <div class="o-d"></div>
+      <div class="o-r" style="background:linear-gradient(90deg,rgba(212,172,88,.6),transparent)"></div>
+    </div>
+  </div>
+  <div class="cd-grid rv" id="cdGrid">
+    <div class="cd-unit"><span class="cd-num" id="cd-d">--</span><span class="cd-lbl">Days</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-h">--</span><span class="cd-lbl">Hours</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-m">--</span><span class="cd-lbl">Minutes</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-s">--</span><span class="cd-lbl">Seconds</span></div>
+  </div>
+  <p class="cd-done rv" id="cdDone">The fairytale has begun ✦</p>
+</section>
+
+<!-- 18 MOMENTS -->
+<section id="traditions" class="sec sec-dark">
+  <div class="sec-head rv">
+    <span class="sec-eyebrow light">Filipino debut traditions</span>
+    <h2 class="sec-title light">Eighteen <em>Moments</em></h2>
+    <div class="sec-orn">
+      <div class="o-l" style="background:linear-gradient(90deg,transparent,var(--gold-light))"></div>
+      <div class="o-s"></div><div class="o-d" style="background:var(--gold-light)"></div><div class="o-s"></div>
+      <div class="o-r" style="background:linear-gradient(90deg,var(--gold-light),transparent)"></div>
+    </div>
+  </div>
+  <div class="trad-tabs rv" id="tradTabs">
+    <button class="tt on" onclick="showTrad(0,this)">18 Roses</button>
+    <button class="tt" onclick="showTrad(1,this)">18 Treasures</button>
+    <button class="tt" onclick="showTrad(2,this)">18 Cosmetics</button>
+    <button class="tt" onclick="showTrad(3,this)">18 Blessings</button>
+    <button class="tt" onclick="showTrad(4,this)">18 Wishes</button>
+  </div>
+
+  <div class="tp on rv" id="tp0">
+    <div class="tp-card">
+      <div class="tp-head">
+        <div class="tp-num">18</div>
+        <div><div class="tp-title">Roses</div><div class="tp-desc">Eighteen significant men present a rose as a symbol of love, admiration, and their place in Kathleen's life.</div></div>
+      </div>
+      <div class="tp-grid" id="gRoses"></div>
+    </div>
+  </div>
+  <div class="tp rv" id="tp1">
+    <div class="tp-card">
+      <div class="tp-head">
+        <div class="tp-num">18</div>
+        <div><div class="tp-title">Treasures</div><div class="tp-desc">Eighteen meaningful gifts from cherished people, each a prayer and blessing for Kathleen's new chapter.</div></div>
+      </div>
+      <div class="tp-grid" id="gTreasures"></div>
+    </div>
+  </div>
+  <div class="tp rv" id="tp2">
+    <div class="tp-card">
+      <div class="tp-head">
+        <div class="tp-num">18</div>
+        <div><div class="tp-title">Cosmetics</div><div class="tp-desc">Eighteen ladies celebrate the inner and outer beauty of the woman Kathleen is becoming.</div></div>
+      </div>
+      <div class="tp-grid" id="gCosmetics"></div>
+    </div>
+  </div>
+  <div class="tp rv" id="tp3">
+    <div class="tp-card">
+      <div class="tp-head">
+        <div class="tp-num">18</div>
+        <div><div class="tp-title">Blessings</div><div class="tp-desc">Eighteen souls offer a violet bill — a symbol of prosperity and God's favour as Kathleen steps into adulthood.</div></div>
+      </div>
+      <div class="tp-grid" id="gBlessings"></div>
+    </div>
+  </div>
+  <div class="tp rv" id="tp4">
+    <div class="tp-card">
+      <div class="tp-head">
+        <div class="tp-num">18</div>
+        <div><div class="tp-title">Handwritten Wishes</div><div class="tp-desc">Eighteen personal letters carrying the most heartfelt hopes and prayers for Kathleen's beautiful future.</div></div>
+      </div>
+      <div class="tp-grid" id="gWishes"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ENTOURAGE -->
+<!-- <section id="entourage" class="sec sec-alt">
+  <div class="sec-head rv">
+    <span class="sec-eyebrow">Her royal court</span>
+    <h2 class="sec-title">The <em>Entourage</em></h2>
+    <div class="sec-orn"><div class="o-l"></div><div class="o-d"></div><div class="o-r"></div></div>
+  </div>
+  <div class="ent-box rv">
+    <div class="ent-title">Coming Soon</div>
+    <p class="ent-body">The names of Kathleen's royal entourage will be announced soon.<br>Watch this space as her court is revealed.</p>
+  </div>
+</section> -->
+
+<!-- MAP -->
+<section id="map-section" class="sec">
+  <div class="sec-head rv">
+    <span class="sec-eyebrow">Find your way</span>
+    <h2 class="sec-title">Venue &amp; <em>Directions</em></h2>
+    <div class="sec-orn"><div class="o-l"></div><div class="o-s"></div><div class="o-d"></div><div class="o-s"></div><div class="o-r"></div></div>
+  </div>
+  <div class="map-wrap rv">
+    <div class="map-frame">
+      <iframe src="https://maps.google.com/maps?q=138+JP+Rizal+St+Poblacion+2+Mendez+Cavite+Philippines&output=embed"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Venue – Mendez, Cavite">
+      </iframe>
+    </div>
+    <div class="map-card">
+      <div class="mp-icon">📍</div>
+      <div>
+        <div class="mp-name">JCTGBTG — Mendez, Cavite</div>
+        <div class="mp-addr">138 JP Rizal St., Poblacion 2, Puremart Bldg.<br>Mendez, Cavite, Philippines</div>
+        <a class="mp-btn"
+          href="https://maps.google.com/?q=138+JP+Rizal+St+Poblacion+2+Mendez+Cavite+Philippines"
+          target="_blank" rel="noopener noreferrer">Get Directions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp" class="sec sec-dark">
+  <div class="sec-head rv">
+    <span class="sec-eyebrow light">Reserve your seat</span>
+    <h2 class="sec-title light">RSVP <em>Here</em></h2>
+    <div class="sec-orn">
+      <div class="o-l" style="background:linear-gradient(90deg,transparent,var(--gold-light))"></div>
+      <div class="o-d"></div>
+      <div class="o-r" style="background:linear-gradient(90deg,var(--gold-light),transparent)"></div>
+    </div>
+  </div>
+  <div class="rsvp-wrap rv">
+    <p class="rsvp-notice">Kindly confirm your attendance by June 8, 2026</p>
+
+    <!-- FORMSPREE SETUP NOTE (visible to site owner only during setup) -->
+    <!--  <div class="rsvp-formspree-note">
+      <strong style="color:var(--gold-light);">&#9432; For the site owner:</strong> To receive RSVP emails, sign up free at
+      <a href="https://formspree.io" target="_blank">formspree.io</a>, create a form, then replace
+      <code style="color:var(--orchid);">YOUR_FORMSPREE_ID</code> in the form action below with your form ID.
+      Remove this notice once set up.
+    </div> -->
+
+    <div class="rsvp-card">
+      <!-- Formspree: change action to https://formspree.io/f/YOUR_FORMSPREE_ID -->
+      <form id="rsvpForm" action="https://formspree.io/f/xqejdyed" method="POST" onsubmit="handleRSVP(event)">
+        <input type="hidden" name="_subject" value="RSVP - Kathleen Zuriela Cruz Debut 2026"/>
+        <input type="hidden" name="_next" value=""/>
+        <div class="fg">
+          <label class="fl" for="rn">Full Name</label>
+          <input class="fi" type="text" id="rn" name="name" placeholder="Your full name" required/>
+        </div>
+        <div class="fg">
+          <label class="fl" for="rc">Contact Number</label>
+          <input class="fi" type="tel" id="rc" name="contact" placeholder="09xx xxx xxxx"/>
+        </div>
+        <div class="fg">
+          <label class="fl" for="ra">Will you attend?</label>
+          <select class="fs" id="ra" name="attendance" required>
+            <option value="" disabled selected>-- Select --</option>
+            <option value="Yes, with great pleasure!">Yes, with great pleasure!</option>
+            <option value="Regretfully unable to attend">Regretfully unable to attend</option>
+            <option value="Not yet certain">Not yet certain</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="fl" for="rg">Number of Guests</label>
+          <select class="fs" id="rg" name="guests">
+            <option value="1">1 — Just me</option>
+            <option value="2">2 guests</option>
+            <option value="3">3 guests</option>
+            <option value="4">4 guests</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="fl" for="rm">Message for Kathleen</label>
+          <textarea class="ft" id="rm" name="message" placeholder="Leave her a warm birthday wish..."></textarea>
+        </div>
+        <button type="submit" class="fb">Confirm Attendance</button>
+      </form>
+      <div class="rsvp-ok" id="rsvpOk">
+        <div class="rsvp-ok-title">Thank you! ✦</div>
+        <p class="rsvp-ok-body">Kathleen is so excited to celebrate with you.<br>See you on June 17! 🌟</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-rule"></div>
+  <div class="ft-name">Kathleen Zuriela Cruz</div>
+  <div class="ft-quote">"By God's grace, my story continues to unfold like a fairytale."</div>
+  <div class="ft-rule"></div>
+  <div class="ft-credit">Crafted with love by Padayon Invitation PH</div>
+</footer>
+
+<script>
+/* ── LANTERNS ── */
+(function(){
+  var f=document.getElementById('lf');
+  for(var i=0;i<20;i++){
+    var l=document.createElement('div');l.className='ln';
+    l.style.cssText=[
+      'left:'+(3+Math.random()*94)+'%',
+      'bottom:'+(Math.random()*5-6)+'px',
+      '--ld:'+(7+Math.random()*11)+'s',
+      '--dl:'+(Math.random()*16)+'s',
+      '--dx:'+(-70+Math.random()*140)+'px',
+      '--rr:'+(-18+Math.random()*36)+'deg'
+    ].join(';');
+    f.appendChild(l);
+  }
+})();
+
+/* ── COUNTDOWN ── */
+function tick(){
+  var diff=new Date('2026-06-17T14:30:00+08:00').getTime()-Date.now();
+  if(diff<=0){
+    document.getElementById('cdGrid').style.display='none';
+    document.getElementById('cdDone').style.display='block';
+    return;
+  }
+  var d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),
+      m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
+  document.getElementById('cd-d').textContent=String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+
+/* ── TRADITION NAMES ── */
+var ph=Array.from({length:18},function(_,i){return 'Guest Name '+(i+1);});
+function buildNames(id,arr){
+  var c=document.getElementById(id);if(!c)return;
+  c.innerHTML=arr.map(function(n,i){
+    return '<div class="tp-item"><span class="tp-n">'+String(i+1).padStart(2,'0')+'</span><span class="tp-v">'+n+'</span></div>';
+  }).join('');
+}
+buildNames('gRoses',ph.slice());
+buildNames('gTreasures',ph.slice());
+buildNames('gCosmetics',ph.slice());
+buildNames('gBlessings',ph.slice());
+buildNames('gWishes',ph.slice());
+
+function showTrad(idx,btn){
+  document.querySelectorAll('.tp').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.tt').forEach(function(b){b.classList.remove('on');});
+  document.getElementById('tp'+idx).classList.add('on');
+  btn.classList.add('on');
+}
+
+/* ── LIGHTBOX ── */
+var lbIdx=0,lbTotal=5;
+var lbCaptions=['Kathleen · Featured Portrait','Kathleen · Portrait 2','Kathleen · Portrait 3','Kathleen · Portrait 4','Kathleen · Portrait 5'];
+function openLightbox(idx){
+  lbIdx=idx;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function updateLightbox(){
+  document.getElementById('lbCaption').textContent=lbCaptions[lbIdx];
+  // If you add real images, swap the placeholder div for an img element here
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeLightboxOutside(e){
+  if(e.target===document.getElementById('lightbox'))closeLightbox();
+}
+function navLightbox(dir){
+  lbIdx=(lbIdx+dir+lbTotal)%lbTotal;
+  updateLightbox();
+}
+document.addEventListener('keydown',function(e){
+  var lb=document.getElementById('lightbox');
+  if(!lb.classList.contains('open'))return;
+  if(e.key==='ArrowLeft')navLightbox(-1);
+  if(e.key==='ArrowRight')navLightbox(1);
+  if(e.key==='Escape')closeLightbox();
+});
+
+/* ── RSVP ── */
+function handleRSVP(e){
+  e.preventDefault();
+  var form=document.getElementById('rsvpForm');
+  var action=form.action;
+
+  // If Formspree ID not yet set, show local success only
+  if(action.includes('YOUR_FORMSPREE_ID')){
+    form.style.display='none';
+    document.getElementById('rsvpOk').style.display='block';
+    return;
+  }
+  // Otherwise submit via fetch to Formspree
+  fetch(action,{
+    method:'POST',
+    body:new FormData(form),
+    headers:{Accept:'application/json'}
+  }).then(function(r){
+    if(r.ok){
+      form.style.display='none';
+      document.getElementById('rsvpOk').style.display='block';
+    }else{
+      alert('Something went wrong. Please try again.');
+    }
+  }).catch(function(){
+    alert('Network error. Please try again.');
+  });
+}
+
+/* ── SCROLL REVEAL ── */
+var rvEls=document.querySelectorAll('.rv');
+new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('on');});
+},{threshold:0.07}).observe
+// observe all
+;(function(){
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting)e.target.classList.add('on');});
+  },{threshold:0.07});
+  rvEls.forEach(function(r){io.observe(r);});
+})();
+</script>
+</body>
+</html>
