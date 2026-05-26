@@ -1386,23 +1386,59 @@ function tick(){
 tick();setInterval(tick,1000);
 
 /* ── TRADITION NAMES ── */
-var roses = ['Juan dela Cruz','Miguel Santos','Carlo Reyes','...and so on up to 18'];
-var treasures = ['Maria Garcia','Ana Lim','Sofia Tan','...'];
-var cosmetics = ['Bianca Cruz','Trisha Gomez','Lia Mendoza','...'];
-var blessings = ['Tito Bobby','Tita Rose','Lolo Pedro','...'];
-var wishes = ['Best Friend 1','Best Friend 2','Ninang 1','...'];
-   
 function buildNames(id,arr){
   var c=document.getElementById(id);if(!c)return;
   c.innerHTML=arr.map(function(n,i){
     return '<div class="tp-item"><span class="tp-n">'+String(i+1).padStart(2,'0')+'</span><span class="tp-v">'+n+'</span></div>';
   }).join('');
 }
-buildNames('gRoses', roses);
-buildNames('gTreasures', treasures);
-buildNames('gCosmetics', cosmetics);
-buildNames('gBlessings', blessings);
-buildNames('gWishes', wishes);
+
+var gRoses=[
+  'Keith Cruz','Pastor Zesner Espinosa','Matthew Echavez','Relsen Aure',
+  'George Cruz','Froilan Cruz','Yuan Abella','Jian Cleofe',
+  'Agustin Maraan','Guillian Minoza','Chester Vicedo','Uno Perey',
+  'Jillian Cleofe','Jorosh Maralang','Sebastian Penaflor','Darelle Llamado',
+  'Pastor Gino Ergina','Eric Cruz'
+];
+
+var gTreasures=[
+  'Jessica Borbon','Marga Aure','Jessica Alegre','Aliah Delas Alas',
+  'Janna Mojica','Lyanna Croox','Angela De Guia','Marvielle Mararagan',
+  'Pauline Lacabe','Mhyca Arceli','Ayeezha Sampaga','Kate Dela Cruz',
+  'Aljean Maraan','Sammer David','Thiffany Pena','Elica Valguna',
+  'Jaiyanna Caralipio','Chloe Espinosa'
+];
+
+var gCosmetics=[
+  'Vanessa Cruz','Mia Hernando','Shiella Pangilinan','Jamela Cruz',
+  'Tamara Cruz','Jada Cruz','Camielle Paragsa','Faith Matulac',
+  'Wynn Cudiamat','Affina Sabuela','Arhean Dimapilis','Samantha Atienza',
+  'Elrish Perlado','Crisha Gloriani','Xyrelle Alvear','Tamara Garcia',
+  'Mary Baybay','Alexa Mae'
+];
+
+var gBlessings=[
+  'Brenda Echavez','Arnold Aure','Carlo Espinosa','Mj Rosal',
+  'Bill Cruz','Tess Tecson','Erwin Cruz','Zeny Aure',
+  'Joyce & Joji Cruz','Janet Toledo','Elhieza Espinosa','Joan Cleofe',
+  'Juvy Caralipio','Glenda Rivera','Genelou Malabag','Theressa Maraan',
+  'Josephine Gomez','Mayvil Cruz'
+];
+
+var gWishes=[
+  'Katriel Cruz','Patrise Ancahas','Nica Veneracion','Mico Ergina',
+  'Rojen Abuela','Aljon Toledo','Psalm Penaflor','Kryztian Pascual',
+  'Criss Penales','Jacky Mahinay','Devie Abcede','Jaycee Santelices',
+  'Andrea Romera','Micah De Sagun','Aliah Mardo','Gio Minoza',
+  'Geon Rollon','Kirby Escano'
+];
+
+buildNames('gRoses', gRoses);
+buildNames('gTreasures', gTreasures);
+buildNames('gCosmetics', gCosmetics);
+buildNames('gBlessings', gBlessings);
+buildNames('gWishes', gWishes);
+
 
 function showTrad(idx,btn){
   document.querySelectorAll('.tp').forEach(function(p){p.classList.remove('on');});
