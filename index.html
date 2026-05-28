@@ -1067,8 +1067,8 @@ footer::before{
       <div class="gallery-expand">⤢</div>
     </div>
     <!-- PHOTO 6 -->
-    <div class="gallery-item" onclick="openLightbox(4)">
-      <img src="https://raw.githubusercontent.com/zurckeith03/Kathleen-s-Debut/main/6.jpg" alt="Kathleen pre-debut portrait 1">
+    <div class="gallery-item" onclick="openLightbox(5)">
+      <img src="https://raw.githubusercontent.com/zurckeith03/Kathleen-s-Debut/main/6.jpg" alt="Kathleen portrait 6">
       <div class="gallery-overlay"><span class="gallery-caption">Kathleen · 2026</span></div>
       <div class="gallery-expand">⤢</div>
     </div>     
@@ -1133,17 +1133,9 @@ footer::before{
 <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
   <button class="lb-nav lb-prev" onclick="navLightbox(-1)">&#8592;</button>
-   <div class="lightbox-placeholder" id="lbContent">
-      <div class="gp-icon" style="font-size:48px;opacity:.3;">
-           <img src="https://raw.githubusercontent.com/zurckeith03/Kathleen-s-Debut/main/1.jpg" >
-           <img src="https://raw.githubusercontent.com/zurckeith03/Kathleen-s-Debut/main/2.jpg" >
-           <img src="https://raw.githubusercontent.com/zurckeith03/Kathleen-s-Debut/main/3.jpg" >
-           <img src="https://raw.githubusercontent.com/zurckeith03/Kathleen-s-Debut/main/4.jpg" >
-           <img src="https://raw.githubusercontent.com/zurckeith03/Kathleen-s-Debut/main/5.jpg" >
-           <img src="https://raw.githubusercontent.com/zurckeith03/Kathleen-s-Debut/main/6.jpg" >
-      </div> 
-    <!-- <p class="gp-txt">Photo placeholder</p> -->    
-  </div>
+  <img id="lbContent" src="" alt="Kathleen pre-debut"
+       style="max-width:90vw;max-height:80vh;object-fit:contain;
+              border:1px solid rgba(184,137,42,.3);display:block;"/>
   <p class="lb-caption" id="lbCaption">Kathleen Zuriela Cruz · Pre-debut 2026</p>
   <button class="lb-nav lb-next" onclick="navLightbox(1)">&#8594;</button>
 </div>
@@ -1448,8 +1440,11 @@ function showTrad(idx,btn){
 }
 
 /* ── LIGHTBOX ── */
-var lbIdx=0,lbTotal=5;
-var lbCaptions=['Kathleen · Featured Portrait','Kathleen · Portrait 2','Kathleen · Portrait 3','Kathleen · Portrait 4','Kathleen · Portrait 5'];
+var lbIdx=0,lbTotal=6;
+var lbCaptions=[
+  'Kathleen · Portrait 1','Kathleen · Portrait 2','Kathleen · Portrait 3',
+  'Kathleen · Portrait 4','Kathleen · Portrait 5','Kathleen · Portrait 6'
+];
 function openLightbox(idx){
   lbIdx=idx;
   updateLightbox();
@@ -1457,8 +1452,10 @@ function openLightbox(idx){
   document.body.style.overflow='hidden';
 }
 function updateLightbox(){
-  document.getElementById('lbCaption').textContent=lbCaptions[lbIdx];
-  // If you add real images, swap the placeholder div for an img element here
+  var imgs=document.querySelectorAll('.gallery-item img');
+  var lbImg=document.getElementById('lbContent');
+  if(imgs[lbIdx]){lbImg.src=imgs[lbIdx].src;}
+  document.getElementById('lbCaption').textContent=lbCaptions[lbIdx]||'Kathleen Zuriela Cruz · Pre-debut 2026';
 }
 function closeLightbox(){
   document.getElementById('lightbox').classList.remove('open');
